@@ -1,8 +1,8 @@
 version: '3.5'
 
 services:
-    nginx_gym:
-        container_name: gym_nginx
+    nginx:
+        container_name: nginx_electronic_point
         env_file:
             - .env
         build:
@@ -19,11 +19,11 @@ services:
             - app
             - redis
         networks:
-            - GymNetwork
+            - PointNetwork
 
     app:
-        container_name: gym_app
-        hostname: api-gym.localhost
+        container_name: electronic_point_app
+        hostname: electronic-point.localhost
         links:
             - mysql
         build:
@@ -39,10 +39,10 @@ services:
         depends_on:
             -   mysql
         networks:
-            - GymNetwork
+            - PointNetwork
 
     mysql:
-        container_name: gym_mysql
+        container_name: electronic_point_mysql
         command: --init-file /docker-entrypoint-initdb.d/structure.sql
         env_file:
           - .env
@@ -60,22 +60,22 @@ services:
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         networks:
-            - GymNetwork
+            - PointNetwork
     redis:
-        container_name: gym_redis
+        container_name: electronic_point_redis
         env_file:
           - .env
-        hostname: api-gym.redis
+        hostname: electronic-point.redis
         image: redis
         ports:
           - "${REDIS_PORT}:${REDIS_PORT}"
         networks:
-            - GymNetwork
+            - PointNetwork
 volumes:
     database:
     esdata:
 
 networks:
-    GymNetwork:
+    PointNetwork:
         driver: bridge
-        name: GymNetwork
+        name: PointNetwork
