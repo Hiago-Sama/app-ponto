@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
-class TimeStampController extends Controller
+class TimeStampBaseController extends BaseController
 {
     public function cacheTimestamp(Request $request)
     {
@@ -14,7 +14,5 @@ class TimeStampController extends Controller
         $data = Carbon::parse($hora)->format('Y-m-d H:m:s');
 
         Redis::set('teste', $data);
-
-        dd(Redis::get('teste'));
     }
 }

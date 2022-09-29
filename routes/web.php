@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\TimeStampController;
+use App\Http\Controllers\TimeStampBaseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 Route::prefix('marcacao')->group(function () {
-    Route::post('/cache-timestamp', [TimeStampController::class, 'cacheTimestamp'])->name('cache.timestamp');
+    Route::post('/cache-timestamp', [TimeStampBaseController::class, 'cacheTimestamp'])->name('cache.timestamp');
 });
