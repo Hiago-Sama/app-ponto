@@ -9,8 +9,7 @@ class Functions extends BaseModel
 
     protected $fillable = [
         'label',
-        'name',
-        'level'
+        'name'
     ];
 
     public function users()

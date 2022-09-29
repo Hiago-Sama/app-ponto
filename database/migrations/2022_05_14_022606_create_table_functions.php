@@ -18,7 +18,6 @@ class CreateTableFunctions extends Migration
             $table->uuid('uid_function')->primary()->index();
             $table->string('label')->unique()->index()->nullable(false);
             $table->string('name')->unique()->index()->nullable(false);
-            $table->string('level')->index()->nullable(false);
 
             $table->dateTime('created_at')->useCurrent()->index();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()->index();

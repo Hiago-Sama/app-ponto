@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTablePhonesAcademy extends Migration
+class CreateTablePhonesCompany extends Migration
 {
     /**
      * Run the migrations.
@@ -34,6 +34,6 @@ class CreateTablePhonesAcademy extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phones_academy');
+        Schema::dropIfExists('phones_company');
     }
 }

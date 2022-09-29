@@ -11,7 +11,9 @@ class People extends BaseModel
         'full_name',
         'email',
         'cpf',
-        'birthday'
+        'birthday',
+        'uid_status',
+        'uid_address'
     ];
 
     public function status()

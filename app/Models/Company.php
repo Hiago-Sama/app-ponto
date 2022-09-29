@@ -5,7 +5,7 @@ namespace App\Models;
 class Company extends BaseModel
 {
     protected $primaryKey = 'uid_company';
-    protected $table = 'academy_training';
+    protected $table = 'company';
 
     protected $fillable = [
         'name',
