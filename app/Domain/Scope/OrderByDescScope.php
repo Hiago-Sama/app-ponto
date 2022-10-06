@@ -1,7 +1,6 @@
 <?php
 
-
-namespace App\Scope;
+namespace App\Domain\Scope;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
