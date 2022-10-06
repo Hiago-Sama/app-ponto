@@ -2,9 +2,9 @@
 
 namespace App\Domain\Repositories\Tables;
 
-use App\Models\AcademyTraining;
+use App\Models\Company;
 
 class CompanyRepository extends BaseTableRepository
 {
-    protected $model = AcademyTraining::class;
+    protected $model = Company::class;
 }

@@ -6,7 +6,7 @@ use App\Http\Requests\StorepeopleRequest;
 use App\Http\Requests\UpdatepeopleRequest;
 use App\Models\people;
 
-class PeopleBaseController extends BaseController
+class PeopleController extends BaseController
 {
 
 }

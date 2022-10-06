@@ -18,7 +18,7 @@ class Address extends BaseModel
 
     public function people()
     {
-        return $this->belongsTo(People::class, 'uid_address');
+        return $this->belongsTo(People::class, 'uid_address', 'uid_address');
     }
 
     public function company()

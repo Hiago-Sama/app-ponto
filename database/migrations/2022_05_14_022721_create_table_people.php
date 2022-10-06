@@ -14,12 +14,12 @@ class CreateTablePeople extends Migration
      */
     public function up()
     {
+
         Schema::create('people', function (Blueprint $table) {
             $table->uuid('uid_people')->primary()->index();
             $table->string('full_name')->index()->nullable(false);
             $table->string('cpf')->unique()->index()->nullable(false);
             $table->string('email')->unique()->index()->nullable(false);
-            $table->string('password')->nullable(false);
             $table->string('birthday')->index()->nullable(false);
 
             $table->foreignUuid('uid_address')->constrained('address', 'uid_address');

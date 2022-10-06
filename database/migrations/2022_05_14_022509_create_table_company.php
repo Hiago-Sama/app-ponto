@@ -20,7 +20,6 @@ class CreateTableCompany extends Migration
             $table->string("fantasy_name")->index()->nullable(false);
             $table->string("cnpj")->unique()->index()->nullable(false);
 
-            $table->foreignUuid('uid_address')->constrained('address','uid_address');
             $table->foreignUuid('uid_status')->constrained('status','uid_status');
 
             $table->dateTime('created_at')->useCurrent()->index();

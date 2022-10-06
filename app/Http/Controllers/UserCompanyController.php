@@ -6,7 +6,7 @@ use App\Http\Requests\Storeuser_companyRequest;
 use App\Http\Requests\Updateuser_companyRequest;
 use App\Models\userCompany;
 
-class UserCompanyBaseController extends BaseController
+class UserCompanyController extends BaseController
 {
 
 }

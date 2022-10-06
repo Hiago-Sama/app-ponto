@@ -25,18 +25,12 @@ class BaseTableRepository
 
     public function firstOrCreate(array $attributes = []): Model
     {
-        $instance = $this->createModel();
-
-        return $instance->firstOrCreate($attributes);
+        return $this->createModel()->firstOrCreate($attributes);
     }
 
     public function firstOrNew(array $attributes = []): Model
     {
-        $instance = $this->createModel();
-
-        $instance->firstOrNew($attributes);
-
-        return $instance;
+        return $this->createModel()->firstOrNew($attributes);
     }
 
     public function createModel(): Model

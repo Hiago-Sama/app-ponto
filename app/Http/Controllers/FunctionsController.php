@@ -6,7 +6,7 @@ use App\Http\Requests\StorefunctionsRequest;
 use App\Http\Requests\UpdatefunctionsRequest;
 use App\Models\functions;
 
-class FunctionsBaseController extends BaseController
+class FunctionsController extends BaseController
 {
 
 }
