@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\Config\BaseException;
+use App\Exceptions\Config\BuildExceptions;
+use App\Exceptions\DefaultException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -23,14 +26,16 @@ class BaseController extends Controller
         ], CodeResponse::HTTP_CREATED);
     }
 
-    protected function responseException(?array $trace, ?array $file, ?string $message, ?int $code): JsonResponse
+    protected function responseException(?string $file, ?string $message, ?array $trace = []): JsonResponse
     {
-        Log::error($message, ['message' => $message, 'file' => $file, 'trace' => $trace]);
+        $exception = new BaseException(
+            $file . 'Error',
+            $message,
+            DefaultException::GENERAL_SUPPORT_MESSAGE,
+            CodeResponse::HTTP_UNPROCESSABLE_ENTITY,
+            $trace
+        );
 
-        return Response::json([
-            'message' => $message,
-            'file' => $file,
-            'trace' => $trace,
-        ], $code > 599 ? CodeResponse::HTTP_INTERNAL_SERVER_ERROR : $code);;
+        throw new BuildExceptions($exception);
     }
 }

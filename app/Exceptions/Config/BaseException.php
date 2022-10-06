@@ -7,7 +7,6 @@ namespace App\Exceptions\Config;
 class BaseException
 {
     private $type;
-    private $messageForHumans;
     private $reason;
     private $support;
     private $httpCode;
@@ -16,14 +15,12 @@ class BaseException
 
     public function __construct(
         string $type,
-        string $messageForHumans,
         string $reason,
         string $support,
         int $httpCode = 500,
         array $data = []
     ) {
         $this->type             = $type;
-        $this->messageForHumans = $messageForHumans;
         $this->reason           = $reason;
         $this->support          = $support;
         $this->httpCode         = $httpCode;
@@ -44,14 +41,6 @@ class BaseException
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMessageForHumans()
-    {
-        return $this->messageForHumans;
     }
 
     /**
@@ -87,7 +76,6 @@ class BaseException
     {
         return [
             'type' => $this->type,
-            'messageForHumans' => $this->messageForHumans,
             'reason' => $this->reason,
             'support' => $this->support,
             'httpCode' => $this->httpCode,

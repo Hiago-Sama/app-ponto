@@ -7,6 +7,7 @@ use App\Exceptions\Config\BuildExceptions;
 use App\Exceptions\DefaultException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class CompanyRequest extends FormRequest
@@ -49,11 +50,9 @@ class CompanyRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator): void
     {
-
         $exception = new BaseException(
-            'AcademyTrainingFormResquestError',
+            'CompanyRequestResquestError',
             'Encontramos erros nos dados informados.',
-            'Verifique se todos os dados foram informados corretamente',
             DefaultException::GENERAL_SUPPORT_MESSAGE,
             Response::HTTP_UNPROCESSABLE_ENTITY,
             $validator->errors()->getMessages()

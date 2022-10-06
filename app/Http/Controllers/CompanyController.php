@@ -20,7 +20,7 @@ class CompanyController extends BaseController
         try {
             $response = $this->companyService->crete($request->all());
         } catch (\RuntimeException $exception) {
-            return $this->responseException($exception->getTrace(), $exception->getFile(), $exception->getMessage(), $exception->getCode());
+            return $this->responseException($exception->getFile(), $exception->getMessage(), $exception->getTrace());
         }
 
         return $this->responseCreated($response, 'Criado com sucesso!');
