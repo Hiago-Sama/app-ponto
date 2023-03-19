@@ -1,81 +1,26 @@
 version: '3.5'
 
 services:
-    nginx:
-        container_name: nginx_electronic_point
-        env_file:
-            - .env
-        build:
-            context: ./docker/build/nginx
-            dockerfile: Dockerfile
-        volumes:
-            - ${APPLICATION}:/var/www/html
-            - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
-            - ${NGINX_SITES_PATH}:/etc/nginx/conf.d
-        ports:
-            - "${NGINX_HOST_HTTP_PORT}:80"
-            - "${NGINX_HOST_HTTPS_PORT}:443"
-        links:
-            - app
-            - redis
-        networks:
-            - PointNetwork
-
-    app:
-        container_name: electronic_point_app
-        hostname: electronic-point.localhost
-        links:
-            - mysql
+    app-ponto:
+        container_name: app-ponto
+        hostname: app-ponto.localhost
+        restart: always
         build:
             context: ./docker/build/php-fpm
             dockerfile: Dockerfile
+        working_dir: /var/www/html/app-ponto
         expose:
             - "9000"
-        volumes:
-            - ${APPLICATION}:/var/www/html
         environment:
             - COMPOSER_MEMORY_LIMIT=-1
-            #- PHP_IDE_CONFIG:serverName=Xdebug
-        depends_on:
-            -   mysql
-        networks:
-            - PointNetwork
-
-    mysql:
-        container_name: electronic_point_mysql
-        command: --init-file /docker-entrypoint-initdb.d/structure.sql
-        env_file:
-          - .env
-        build:
-            context: ./docker/build/mysql
-            dockerfile: Dockerfile
-        ports:
-            - "${MYSQL_PORT}:${MYSQL_PORT}"
+           #- PHP_IDE_CONFIG:serverName=Xdebug
         volumes:
-            - database:/var/lib/mysql
-            - ./database/initialization/structure.sql:/docker-entrypoint-initdb.d/structure.sql
-        environment:
-            - MYSQL_DATABASE=${MYSQL_DATABASE}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - ./:/var/www/html/app-ponto
+            - ./docker/build/config/custom.ini:/usr/local/etc/php/conf.d/custom.ini
         networks:
-            - PointNetwork
-    redis:
-        container_name: electronic_point_redis
-        env_file:
-          - .env
-        hostname: electronic-point.redis
-        image: redis
-        ports:
-          - "${REDIS_PORT}:${REDIS_PORT}"
-        networks:
-            - PointNetwork
-volumes:
-    database:
-    esdata:
+            - MyNetwork
 
 networks:
-    PointNetwork:
+    MyNetwork:
         driver: bridge
-        name: PointNetwork
+        name: MyNetwork
